@@ -1,0 +1,44 @@
+{
+  "plugins": [
+    "prettier-plugin-astro",
+    "prettier-plugin-tailwindcss",
+    "prettier-plugin-organize-attributes"
+  ],
+  "attributeGroups": [
+    "^id$",
+    "^class$",
+    "^style$",
+    "^type$",
+    "^role$",
+    "^aria-",
+    "^on[A-Z]",
+    "^on",
+    "^ref",
+    "^key",
+    "^for$",
+    "^slot$",
+    "^name$",
+    "^value$",
+    "^checked$",
+    "^disabled$",
+    "^required$",
+    "^readonly$",
+    "^src$",
+    "^href$",
+    "^alt$",
+    "^title$",
+    "^placeholder$",
+    "^label$",
+    "^aria-",
+    "^data-",
+    ".*"
+  ],
+  "overrides": [
+    {
+      "files": "*.astro",
+      "options": {
+        "parser": "astro"
+      }
+    }
+  ]
+}
