@@ -1,0 +1,38 @@
+---
+import { type Playlist } from "@/lib/data";
+
+interface Props {
+  playlist: Playlist;
+}
+
+const { playlist } = Astro.props;
+
+const { id, cover, title, artists, color } = playlist;
+
+const artistsString = artists.join(", ");
+---
+
+<a
+  href={`/playlist/${id}`}
+  class="playlist-item relative flex w-44 flex-col items-center gap-2 overflow-hidden rounded-md bg-zinc-500/30 p-2 pb-6 shadow-lg transition-all duration-300 hover:bg-zinc-800 hover:shadow-2xl"
+  transition:name=`playlist ${id} box`
+>
+  <picture class="aspect-square h-auto w-full flex-none">
+    <img
+      src={cover}
+      alt={`cover of ${title} by ${artists}`}
+      class="h-full w-full rounded-md object-cover"
+      transition:name=`playlist ${id} image`
+    />
+  </picture>
+
+  <div class="flex flex-auto flex-col self-start truncate px-2">
+    <h4
+      class="text-sm font-semibold"
+      transition:name=`playlist ${id} title`
+    >
+      {title}
+    </h4>
+    <span class="text-xs text-gray-400" transition:name=`playlist ${id} artists`>{artistsString}</span>
+  </div>
+</a>

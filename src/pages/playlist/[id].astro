@@ -1,0 +1,64 @@
+---
+export const prerender = false;
+
+import Layout from "../../layouts/Layout.astro";
+import PlaylistItemCard from "@/components/PlaylistItemCard.astro";
+
+import { allPlaylists, songs } from "@/lib/data";
+
+const { id } = Astro.params;
+
+const playlist = allPlaylists.find((playlists) => playlists.id === id);
+const playlistSongs = songs.filter(
+  (song) => song.albumId === playlist?.albumId,
+);
+---
+
+<Layout title="Spotify clone">
+  <div
+    id="playlist-container"
+    class="relative flex h-full flex-col overflow-x-hidden bg-zinc-900"
+    transition:name=`playlist ${id} box`
+  >
+    <!-- Page header -->
+
+    <header class="mt-14 flex flex-row gap-8 px-6">
+      <picture class="aspect-square h-52 w-52 flex-none">
+        <img
+          src={playlist?.cover}
+          alt={`cover of ${playlist?.title}`}
+          class="h-full w-full object-cover shadow-lg"
+          transition:name=`playlist ${playlist?.id} image`
+        />
+      </picture>
+
+      <div class="flex flex-col justify-between">
+        <h2 class="flex flex-1 items-end">Playlist</h2>
+        <div>
+          <h1 class="block text-5xl font-bold text-white">
+            {playlist?.title}
+            <span transition:name=`playlist ${playlist?.id} title`></span>
+          </h1>
+        </div>
+
+        <div class="flex flex-1 items-end">
+          <div class="text-sm font-normal text-gray-300">
+            <div transition:name=`playlist ${playlist?.id} artists`>
+              <span>{playlist?.artists.join(", ")}</span>
+            </div>
+            <p class="mt-1">
+              <div class="text-white">50 canciones</div>, 3h aproximadamente
+            </p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="relative z-10 px-6 pt-10"></div>
+
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/80 -z-10"
+    >
+    </div>
+  </div>
+</Layout>
